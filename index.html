@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quer namorar comigo?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffe6f0, #fff0f6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      overflow: hidden; /* impede rolagem */
+    }
+
+    h1 {
+      color: #d6336c;
+      font-size: 2rem;
+      padding: 0 10px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      position: relative;
+      width: 100%;
+      height: 150px; /* área controlada */
+    }
+
+    button {
+      padding: 12px 22px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    #sim {
+      background-color: #d6336c;
+      color: white;
+      margin-right: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    #nao {
+      background-color: #ccc;
+      color: black;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #mensagem {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #008000;
+      font-weight: bold;
+    }
+
+    /* Versão Mobile */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      button {
+        padding: 10px 18px;
+        font-size: 16px;
+      }
+      .buttons {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Quer sair comigo? 💖</h1>
+
+  <div class="buttons">
+    <button id="sim">Sim</button>
+    <button id="nao">Não</button>
+  </div>
+
+  <p id="mensagem"></p>
+
+  <script>
+    const sim = document.getElementById("sim");
+    const nao = document.getElementById("nao");
+    const mensagem = document.getElementById("mensagem");
+    const area = document.querySelector(".buttons");
+
+    // Quando clicar em "Sim"
+    sim.addEventListener("click", () => {
+      mensagem.textContent = "Eu sabia que você Aceitaria! 💕😍";
+    });
+
+    // Função para mover o botão
+    function moverBotao() {
+      const maxX = area.clientWidth - nao.offsetWidth;
+      const maxY = area.clientHeight - nao.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      nao.style.left = `${x}px`;
+      nao.style.top = `${y}px`;
+      nao.style.transform = "none";
+    }
+
+    // Desktop -> mouse
+    nao.addEventListener("mouseenter", moverBotao);
+
+    // Mobile -> toque
+    nao.addEventListener("touchstart", (e) => {
+      e.preventDefault(); // evita clique real
+      moverBotao();
+    });
+  </script>
+</body>
+</html>
